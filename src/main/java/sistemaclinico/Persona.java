@@ -4,7 +4,9 @@
  */
 package sistemaclinico;
 
-public abstract class Persona {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable {
     protected String nombre;
     protected String cedula;
     protected int edad;
@@ -25,6 +27,6 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return nombre + " (Cédula: " + cedula + ", Edad: " + edad + ")";
+        return nombre + " (Cédula/TI: " + cedula + ", Edad: " + edad + ")";
     }
 }

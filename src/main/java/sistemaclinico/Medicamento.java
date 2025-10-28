@@ -4,14 +4,22 @@
  */
 package sistemaclinico;
 
-public class Medicamento {
-    private String nombre;
+import java.io.Serializable;
 
-    public Medicamento(String nombre) { this.nombre = nombre; }
+public class Medicamento implements Serializable {
+    private String nombre;
+    private String dosis;
+
+    public Medicamento(String nombre, String dosis) {
+        this.nombre = nombre;
+        this.dosis = dosis;
+    }
+
     public String getNombre() { return nombre; }
+    public String getDosis() { return dosis; }
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre + " - Dosis: " + dosis;
     }
 }

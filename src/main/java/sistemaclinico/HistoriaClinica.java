@@ -4,29 +4,24 @@
  */
 package sistemaclinico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class HistoriaClinica {
-    private Paciente paciente;
-    private ArrayList<String> evoluciones;
+public class HistoriaClinica implements Serializable {
+    private ArrayList<EvolucionMedica> evoluciones = new ArrayList<>();
 
-    public HistoriaClinica(Paciente paciente) {
-        this.paciente = paciente;
-        this.evoluciones = new ArrayList<>();
-    }
-
-    public void agregarEvolucion(String evolucion) {
+    public void agregarEvolucion(EvolucionMedica evolucion) {
         evoluciones.add(evolucion);
     }
 
     public void mostrarHistorial() {
-        System.out.println("\n--- HISTORIAL CLÍNICO DE " + paciente.getNombre().toUpperCase() + " ---");
+        System.out.println("\nEvoluciones registradas:");
         if (evoluciones.isEmpty()) {
-            System.out.println("No hay evoluciones registradas.");
+            System.out.println("No hay evoluciones médicas registradas.");
         } else {
-            for (String e : evoluciones) {
+            for (EvolucionMedica e : evoluciones) {
+                System.out.println("-------------------------------------");
                 System.out.println(e);
-                System.out.println("--------------------------------------");
             }
         }
     }

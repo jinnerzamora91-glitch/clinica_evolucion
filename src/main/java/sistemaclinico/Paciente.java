@@ -4,19 +4,25 @@
  */
 package sistemaclinico;
 
-public class Paciente extends Persona {
-    private String sintomas;
+public class Paciente extends Persona implements Registrable {
+    private HistoriaClinica historiaClinica;
 
-    public Paciente(String nombre, String cedula, int edad, String sintomas) {
+    public Paciente(String nombre, String cedula, int edad) {
         super(nombre, cedula, edad);
-        this.sintomas = sintomas;
+        this.historiaClinica = new HistoriaClinica();
     }
 
-    public String getSintomas() { return sintomas; }
-    public void setSintomas(String sintomas) { this.sintomas = sintomas; }
+    public HistoriaClinica getHistoriaClinica() {
+        return historiaClinica;
+    }
+
+    @Override
+    public void registrar() {
+        System.out.println("Registrando paciente: " + nombre);
+    }
 
     @Override
     public String toString() {
-        return nombre + " - " + sintomas;
+        return "Paciente: " + super.toString();
     }
 }

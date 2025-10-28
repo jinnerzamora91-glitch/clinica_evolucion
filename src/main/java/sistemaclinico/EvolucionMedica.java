@@ -4,26 +4,27 @@
  */
 package sistemaclinico;
 
-import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class EvolucionMedica {
+public class EvolucionMedica implements Serializable {
     private CitaMedica cita;
     private String diagnostico;
-    private Medicamento medicamento;
+    private String observaciones;
+    private Medicamento medicamento; // Composición
 
-    public EvolucionMedica(CitaMedica cita, String diagnostico, Medicamento medicamento) {
+    public EvolucionMedica(CitaMedica cita, String diagnostico, String observaciones, String nombreMed, String dosis) {
         this.cita = cita;
         this.diagnostico = diagnostico;
-        this.medicamento = medicamento;
+        this.observaciones = observaciones;
+        this.medicamento = new Medicamento(nombreMed, dosis); // Composición
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return "Fecha: " + cita.getFecha().format(f) +
-                "\nMédico: " + cita.getMedico() +
+        return "\nEvolución Médica:" +
                 "\nMotivo: " + cita.getMotivo() +
                 "\nDiagnóstico: " + diagnostico +
-                "\nMedicamento: " + medicamento.getNombre();
+                "\nObservaciones: " + observaciones +
+                "\nMedicamento: " + medicamento;
     }
 }

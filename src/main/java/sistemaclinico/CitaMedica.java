@@ -4,42 +4,29 @@
  */
 package sistemaclinico;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class CitaMedica {
+public class CitaMedica implements Serializable {
     private Paciente paciente;
     private Medico medico;
     private String motivo;
-    private LocalDateTime fecha;
     private boolean finalizada;
-    private String habitacion;
 
-    public CitaMedica(Paciente paciente, Medico medico, String motivo, String habitacion) {
+    public CitaMedica(Paciente paciente, Medico medico, String motivo) {
         this.paciente = paciente;
         this.medico = medico;
         this.motivo = motivo;
-        this.fecha = LocalDateTime.now();
         this.finalizada = false;
-        this.habitacion = habitacion;
     }
 
     public Paciente getPaciente() { return paciente; }
     public Medico getMedico() { return medico; }
     public String getMotivo() { return motivo; }
-    public LocalDateTime getFecha() { return fecha; }
     public boolean isFinalizada() { return finalizada; }
-    public String getHabitacion() { return habitacion; }
-
-    public void finalizar() {
-        finalizada = true;
-        medico.setOcupado(false);
-    }
+    public void setFinalizada(boolean finalizada) { this.finalizada = finalizada; }
 
     @Override
     public String toString() {
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return paciente.getNombre() + " - " + medico + " | Motivo: " + motivo +
-                " | Fecha: " + fecha.format(f) + " | Habitación: " + habitacion;
+        return "Cita médica (Motivo: " + motivo + ", Finalizada: " + finalizada + ")";
     }
 }

@@ -4,22 +4,27 @@
  */
 package sistemaclinico;
 
-public class Medico extends Persona {
+public class Medico extends Persona implements Registrable {
     private String especialidad;
-    private boolean ocupado;
+    private boolean disponible;
 
-    public Medico(String nombre, String cedula, int edad, String especialidad) {
+    public Medico(String nombre, String cedula, int edad, String especialidad, boolean disponible) {
         super(nombre, cedula, edad);
         this.especialidad = especialidad;
-        this.ocupado = false;
+        this.disponible = disponible;
     }
 
     public String getEspecialidad() { return especialidad; }
-    public boolean isOcupado() { return ocupado; }
-    public void setOcupado(boolean ocupado) { this.ocupado = ocupado; }
+    public boolean isDisponible() { return disponible; }
+    public void setDisponible(boolean disponible) { this.disponible = disponible; }
+
+    @Override
+    public void registrar() {
+        System.out.println("Registrando médico: " + nombre);
+    }
 
     @Override
     public String toString() {
-        return "Dr. " + nombre + " (" + especialidad + ")";
+        return super.toString() + " | Especialidad: " + especialidad + " (" + (disponible ? "Disponible" : "Ocupado") + ")";
     }
 }
