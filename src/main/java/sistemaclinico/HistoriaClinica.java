@@ -1,28 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemaclinico;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class HistoriaClinica implements Serializable {
-    private ArrayList<EvolucionMedica> evoluciones = new ArrayList<>();
+public class HistoriaClinica {
+    private Paciente paciente;
+    private List<EvolucionMedica> evoluciones = new ArrayList<>();
 
-    public void agregarEvolucion(EvolucionMedica evolucion) {
-        evoluciones.add(evolucion);
-    }
+    public HistoriaClinica(Paciente paciente) { this.paciente = paciente; }
 
-    public void mostrarHistorial() {
-        System.out.println("\nEvoluciones registradas:");
-        if (evoluciones.isEmpty()) {
-            System.out.println("No hay evoluciones médicas registradas.");
-        } else {
-            for (EvolucionMedica e : evoluciones) {
-                System.out.println("-------------------------------------");
-                System.out.println(e);
-            }
-        }
-    }
+    public void agregarEvolucion(EvolucionMedica e) { evoluciones.add(e); }
+    public List<EvolucionMedica> getEvoluciones() { return evoluciones; }
+
+    @Override
+    public String toString() { return "Historia de " + paciente.getNombre() + " - " + evoluciones.size() + " evoluciones"; }
 }

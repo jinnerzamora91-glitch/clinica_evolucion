@@ -1,28 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemaclinico;
 
 public class Paciente extends Persona implements Registrable {
+    private String direccion;
+    private String telefono;
     private HistoriaClinica historiaClinica;
 
-    public Paciente(String nombre, String cedula, int edad) {
+    public Paciente(String nombre, String cedula, int edad, String direccion, String telefono) {
         super(nombre, cedula, edad);
-        this.historiaClinica = new HistoriaClinica();
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.historiaClinica = new HistoriaClinica(this);
     }
 
-    public HistoriaClinica getHistoriaClinica() {
-        return historiaClinica;
-    }
-
-    @Override
-    public void registrar() {
-        System.out.println("Registrando paciente: " + nombre);
-    }
+    public String getDireccion() { return direccion; }
+    public String getTelefono() { return telefono; }
+    public HistoriaClinica getHistoriaClinica() { return historiaClinica; }
 
     @Override
-    public String toString() {
-        return "Paciente: " + super.toString();
-    }
+    public void registrar() { System.out.println("Paciente registrado: " + nombre); }
+
+    @Override
+    public String toString() { return nombre + " - " + cedula; }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sistemaclinico;
 
 import java.io.Serializable;
@@ -26,7 +22,5 @@ public abstract class Persona implements Serializable {
     public void setEdad(int edad) { this.edad = edad; }
 
     @Override
-    public String toString() {
-        return nombre + " (Cédula/TI: " + cedula + ", Edad: " + edad + ")";
-    }
+    public String toString() { return nombre + " (" + cedula + ")"; }
 }
