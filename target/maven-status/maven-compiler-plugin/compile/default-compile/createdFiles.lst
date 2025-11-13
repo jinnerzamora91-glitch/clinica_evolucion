@@ -9,6 +9,7 @@ sistemaclinico\Sistema.class
 sistemaclinico\SistemaClinicoGUI.class
 sistemaclinico\SistemaClinicoGUI$PanelHistorialClinico.class
 sistemaclinico\SistemaClinicoGUI$PanelRegistrarPaciente.class
+sistemaclinico\SistemaClinicoGUI$1.class
 sistemaclinico\SistemaClinicoGUI$PanelHistorialPagos.class
 sistemaclinico\Medico.class
 sistemaclinico\Persona.class

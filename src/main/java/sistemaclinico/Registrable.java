@@ -1,5 +1,5 @@
 package sistemaclinico;
 
-public interface Registrable { 
-    void registrar(); 
+public interface Registrable {
+    void registrar();
 }

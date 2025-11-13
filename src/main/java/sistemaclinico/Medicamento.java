@@ -16,5 +16,7 @@ public class Medicamento {
     public double getPrecio() { return precio; }
 
     @Override
-    public String toString() { return nombre + " - " + dosis + " ($" + precio + ")"; }
+    public String toString() {
+        return nombre + " - " + dosis + " ($" + precio + ")";
+    }
 }

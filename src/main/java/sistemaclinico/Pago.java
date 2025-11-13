@@ -18,5 +18,7 @@ public class Pago {
     public double getTotal() { return total; }
 
     @Override
-    public String toString() { return "Pago - Cita #" + cita.getId() + " - Paciente: " + cita.getPaciente().getNombre() + " - Total: $" + total; }
+    public String toString() {
+        return "Pago - Cita #" + cita.getId() + " - Paciente: " + cita.getPaciente().getNombre() + " - Total: $" + total;
+    }
 }

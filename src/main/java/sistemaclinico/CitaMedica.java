@@ -54,8 +54,13 @@ public class CitaMedica implements Registrable {
     }
 
     @Override
-    public void registrar() { if (medico != null) medico.setDisponible(false); }
+    public void registrar() {
+        System.out.println("Cita registrada: " + paciente.getNombre() + " con " + (medico != null ? medico.getNombre() : "N/A"));
+        if (medico != null) medico.setDisponible(false);
+    }
 
     @Override
-    public String toString() { return "Cita #" + id + " - " + paciente.getNombre() + " | " + motivo + " | " + getFechaFormatted() + (finalizada ? " (Finalizada)" : ""); }
+    public String toString() {
+        return "Cita #" + id + " - " + paciente.getNombre() + " | " + motivo + " | " + getFechaFormatted() + (finalizada ? " (Finalizada)" : "");
+    }
 }

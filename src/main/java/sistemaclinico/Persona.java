@@ -22,5 +22,7 @@ public abstract class Persona implements Serializable {
     public void setEdad(int edad) { this.edad = edad; }
 
     @Override
-    public String toString() { return nombre + " (" + cedula + ")"; }
+    public String toString() {
+        return nombre + " (" + cedula + ")";
+    }
 }
