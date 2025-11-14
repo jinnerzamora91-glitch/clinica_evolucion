@@ -35,7 +35,9 @@ public class SistemaClinicoGUI extends JFrame {
         loadLogo();
         initUI();
     }
-
+/**
+     * Carga el logo desde recursos (dentro del proyecto o ruta absoluta).
+     */
     private void loadLogo() {
         // intenta recurso empaquetado (src/main/resources/logo.png)
         try (InputStream is = getClass().getResourceAsStream("/logo.png")) {
@@ -107,7 +109,7 @@ public class SistemaClinicoGUI extends JFrame {
         lateral.setBorder(new EmptyBorder(18,12,18,12));
         lateral.add(Box.createRigidArea(new Dimension(0,6)));
 
-        addMenuButton(lateral, "Registrar Paciente", e -> showPanel(new PanelRegistrarPaciente(sistema)));
+        addMenuButton(lateral, "Registrar Pacientes", e -> showPanel(new PanelRegistrarPaciente(sistema)));
         addMenuButton(lateral, "Registrar Cita", e -> showPanel(new PanelRegistrarCita(sistema)));
         addMenuButton(lateral, "Finalizar Cita", e -> showPanel(new PanelFinalizarCita(sistema)));
         addMenuButton(lateral, "Historial Clínico", e -> showPanel(new PanelHistorialClinico(sistema)));
