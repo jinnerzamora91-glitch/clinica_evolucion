@@ -25,7 +25,7 @@ public class SistemaClinicoGUI_Backup extends JFrame {
      * Carga el logo desde recursos (dentro del proyecto o ruta absoluta).
      */
     private void loadLogo() {
-        // intenta recurso empaquetado (src/main/resources/logo.png)
+        // intenta recurso empaquetado (resources/logo.png)
         try (InputStream is = getClass().getResourceAsStream("/logo.png")) {
             if (is != null) {
                 logoImage = ImageIO.read(is);
@@ -33,7 +33,7 @@ public class SistemaClinicoGUI_Backup extends JFrame {
             }
         } catch (Exception ignored) {}
 
-        // fallback a la ruta absoluta que diste
+        // ruta donde esta el logo
         String fallback = "C:/Users/rodal/OneDrive/Documentos/NetBeansProjects/proyecto_clinica/resources/logo.png";
         try {
             File f = new File(fallback);
@@ -147,16 +147,16 @@ public class SistemaClinicoGUI_Backup extends JFrame {
         contentPanel.revalidate();
         contentPanel.repaint();
     }
-
+      //cambiar color del panel del medio
     private void showWelcome() {
         JPanel p = new JPanel(new BorderLayout());
         p.setBackground(Color.WHITE);
-        JLabel lbl = new JLabel("<html><center><span style='font-size:22px;font-weight:700'>Bienvenido a Clínica Zamora</span><br><span style='font-size:12px;color:#2B6777'>Seleccione una opción del menú</span></center></html>", SwingConstants.CENTER);
+        JLabel lbl = new JLabel("<html><center><span style='font-size:22px;font-weight:700'>Bienvenido a la Clinica Zamora</span><br><span style='font-size:12px;color:#2B6777'>Seleccione una opción del menú</span></center></html>", SwingConstants.CENTER);
         p.add(lbl, BorderLayout.CENTER);
         showPanel(p);
     }
 
-    // main
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             SistemaClinicoGUI_Backup gui = new SistemaClinicoGUI_Backup();

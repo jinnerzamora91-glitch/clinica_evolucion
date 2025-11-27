@@ -9,6 +9,7 @@ public class PanelRegistrarPaciente extends JPanel {
     private Sistema sistema;
     private JTextField tfNombre, tfCedula, tfEdad, tfDireccion, tfTelefono;
 
+    // CAMBIA EL COLOR DEL PANEL DEL MEDIO
     public PanelRegistrarPaciente(Sistema sistema) {
         this.sistema = sistema;
         setLayout(new BorderLayout());

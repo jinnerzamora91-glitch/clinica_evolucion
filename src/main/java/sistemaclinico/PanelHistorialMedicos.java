@@ -18,6 +18,20 @@ import java.util.stream.Collectors;
  * - Calcula lo cobrado por cada médico: tarifa de consulta + 10% sobre otros conceptos (medicamentos, habitación).
  */
 public class PanelHistorialMedicos extends JPanel {
+    private static final String LOGO_PATH = "C:/Users/rodal/OneDrive/Documentos/NetBeansProjects/proyecto_clinica/resources/logo.png";
+
+    private com.itextpdf.text.Image cargarLogo() {
+        try {
+            com.itextpdf.text.Image logo = com.itextpdf.text.Image.getInstance(LOGO_PATH);
+            logo.scaleAbsolute(80, 80); // tamaño opcional (puedes cambiarlo)
+            logo.setAlignment(Element.ALIGN_CENTER);
+            return logo;
+        } catch (Exception e) {
+            System.out.println("⚠ No se pudo cargar el logo: " + e.getMessage());
+            return null;
+        }
+    }
+
     private static final Color ACCENT_DARK = new Color(43, 103, 119);
     private Sistema sistema;
     private JComboBox<Medico> cbMedicos;
@@ -87,8 +101,13 @@ public class PanelHistorialMedicos extends JPanel {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
+            
+            // ---- AGREGAR LOGO ----
+            com.itextpdf.text.Image logo = cargarLogo();
+            if (logo != null) document.add(logo);
 
-            // iText Font (nunca usamos java.awt.Font)
+
+            
             com.itextpdf.text.Font titleFont = new com.itextpdf.text.Font(
                     com.itextpdf.text.Font.FontFamily.HELVETICA, 16, com.itextpdf.text.Font.BOLD, new BaseColor(43,103,119)
             );

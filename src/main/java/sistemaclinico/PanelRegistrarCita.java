@@ -9,6 +9,7 @@ public class PanelRegistrarCita extends JPanel {
     private JTextField tfMotivo, tfCostoHab;
     private Sistema sistema;
 
+    // CAMBIA COLOR DEL PANEL
     public PanelRegistrarCita(Sistema sistema) {
         this.sistema = sistema;
         setLayout(new BorderLayout());

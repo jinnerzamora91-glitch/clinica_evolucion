@@ -3,17 +3,25 @@ package sistemaclinico;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import java.io.FileOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Clase auxiliar para evitar duplicar código de generación de PDF
- * (historial clínico y recibo de pago). Implementada con iText 5.
- */
 public class PdfHelper {
 
-    // Si quieres agregar logo desde un BufferedImage, podrías extender este helper.
+    private static final String LOGO_PATH = "C:/Users/rodal/OneDrive/Documentos/NetBeansProjects/proyecto_clinica/resources/logo.png";
+
+    private Image cargarLogo() {
+        try {
+            Image logo = Image.getInstance(LOGO_PATH);
+            logo.scaleAbsolute(80, 80); // tamaño opcional (puedes cambiarlo)
+            logo.setAlignment(Element.ALIGN_CENTER);
+            return logo;
+        } catch (Exception e) {
+            System.out.println("⚠ No se pudo cargar el logo: " + e.getMessage());
+            return null;
+        }
+    }
+
     public void generarPDFHistorialClinico(Paciente paciente) {
         String fileName = "HistorialClinico_" + paciente.getNombre().replaceAll("\\s+","_") + ".pdf";
         Document document = new Document();
@@ -21,13 +29,17 @@ public class PdfHelper {
             PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
 
-            com.itextpdf.text.Font titleFont = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 16, com.itextpdf.text.Font.BOLD, new BaseColor(43,103,119));
+            // ---- AGREGAR LOGO ----
+            Image logo = cargarLogo();
+            if (logo != null) document.add(logo);
+
+            Font titleFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, new BaseColor(43,103,119));
             Paragraph title = new Paragraph("Clínica Zamora\nHistorial Clínico", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             document.add(new Paragraph(" "));
 
-            com.itextpdf.text.Font bold = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, com.itextpdf.text.Font.BOLD);
+            Font bold = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD);
             Paragraph datos = new Paragraph();
             datos.add(new Paragraph("Paciente: " + paciente.getNombre(), bold));
             datos.add(new Paragraph("Cédula: " + paciente.getCedula(), bold));
@@ -52,6 +64,7 @@ public class PdfHelper {
                 table.addCell(c.getMedico().getNombre());
                 table.addCell(c.getMotivo());
                 table.addCell(e.getDiagnostico());
+
                 StringBuilder medsObs = new StringBuilder();
                 if (!e.getMedicamentos().isEmpty()) {
                     for (Medicamento m : e.getMedicamentos()) medsObs.append(m.getNombre()).append(" (").append(m.getDosis()).append(") $").append(m.getPrecio()).append("; ");
@@ -65,13 +78,14 @@ public class PdfHelper {
             document.add(new Paragraph("\nClínica Zamora — Confianza y bienestar"));
             String fecha = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
             document.add(new Paragraph("Generado el: " + fecha));
+
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             document.close();
         }
     }
-
+    
     public void generarPDFHistorialPagos(Pago pago) {
         String fileName = "HistorialPago_Cita_" + pago.getCita().getId() + ".pdf";
         Document document = new Document();
@@ -79,14 +93,18 @@ public class PdfHelper {
             PdfWriter.getInstance(document, new FileOutputStream(fileName));
             document.open();
 
-            com.itextpdf.text.Font titleFont = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 16, com.itextpdf.text.Font.BOLD, new BaseColor(43,103,119));
+            // ---- AGREGAR LOGO ----
+            Image logo = cargarLogo();
+            if (logo != null) document.add(logo);
+
+            Font titleFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, new BaseColor(43,103,119));
             Paragraph title = new Paragraph("Clínica Zamora\nRecibo de Pago", titleFont);
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             document.add(new Paragraph(" "));
 
             CitaMedica c = pago.getCita();
-            com.itextpdf.text.Font bold = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, com.itextpdf.text.Font.BOLD);
+            Font bold = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD);
             Paragraph datos = new Paragraph();
             datos.add(new Paragraph("Cita #: " + c.getId(), bold));
             datos.add(new Paragraph("Paciente: " + c.getPaciente().getNombre(), bold));
@@ -113,10 +131,11 @@ public class PdfHelper {
                 }
             }
 
-            PdfPCell totalCell = new PdfPCell(new Paragraph("TOTAL", new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 12, com.itextpdf.text.Font.BOLD)));
+            PdfPCell totalCell = new PdfPCell(new Paragraph("TOTAL", new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
             totalCell.setBackgroundColor(new BaseColor(220,245,240));
             table.addCell(totalCell);
-            PdfPCell valCell = new PdfPCell(new Paragraph("$" + pago.getTotal(), new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 12, com.itextpdf.text.Font.BOLD)));
+
+            PdfPCell valCell = new PdfPCell(new Paragraph("$" + pago.getTotal(), new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
             table.addCell(valCell);
 
             document.add(table);
@@ -124,6 +143,7 @@ public class PdfHelper {
             document.add(new Paragraph("\nClínica Zamora — Confianza y bienestar"));
             String fecha = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
             document.add(new Paragraph("Generado el: " + fecha));
+
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -132,7 +152,7 @@ public class PdfHelper {
     }
 
     private void addCellHeader(PdfPTable table, String text) {
-        PdfPCell h = new PdfPCell(new Paragraph(text, new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.HELVETICA, 11, com.itextpdf.text.Font.BOLD)));
+        PdfPCell h = new PdfPCell(new Paragraph(text, new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD)));
         h.setBackgroundColor(new BaseColor(220,245,240));
         h.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(h);
